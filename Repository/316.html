@@ -1,0 +1,96 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Моя первая программа</title>
+       
+		<script>  "use strict";
+//16 171 
+function translitOfNum1(num)     //однозначное 
+{   let dict = {0: 'ноль', 1:'один', 2:'два', 3:'три', 4:'четыре', 
+    5:'пять', 6:'шесть', 7:'семь', 8:'восемь', 9:'девять'};
+    let result = [];    
+    for (let key in dict) { 
+            if (num == key) {
+                result.push(dict[key]);
+                break;
+            }
+        } return result.join('');
+}
+
+function translitOfNum11(num)    // двухзначное начинается с 1
+{   let dict = {10:'десять', 11:'одинадцать', 12:'двенадцать', 13:'тринадцать', 14:'четырнадцать', 
+    15:'пятнадцать', 16:'шестнадцать', 17:'семнадцать', 18:'восемнадцать', 19:'девятнадцать'};
+    let result = [];
+    for (let key in dict) {
+        if (num == key) {
+            result.push(dict[key]);
+            break;
+        } 
+    } return result.join('');
+}
+
+function translitOfNum21(num)    //двухзначное не начинается с 1
+{   let dict = {2:'двадцать', 3:'тридцать', 4:'сорок', 5:'пятьдесят', 6:'шестьдесят', 
+    7:'семьдесят', 8:'восемьдесят', 9:'девяносто'}; 
+    let result = [];      
+        for (let key in dict) {
+            if (num == key) {
+                result.push(dict[key]);
+                break;
+            } 
+        } return result.join('');   
+}    
+    
+function translitOfNum111(num)    // трехзначное 
+{   let dict = {1:'сто', 2:'двести', 3:'тристо', 4:'четыресто', 5:'пятьсот', 
+    6:'шестьсот', 7:'семьсот', 8: 'восемьсот', 9: 'девятьсот'}
+    let result = [];  
+        for (let key in dict) {
+            if (num == key) {
+                result.push(dict[key]);
+                break;
+            } 
+        } return result.join('');  
+} 
+
+function translitOfNN(num) {
+    let result = ''; 
+    if (num < 10) { 
+        result = translitOfNum1(num);
+    }
+    else if (num < 20) {
+        result = translitOfNum11(num);
+    }
+    else if (num < 100) {
+        let nums = String(num);
+        result = translitOfNum21(nums[0]);
+        if (nums[1] != '0') {
+            result += ' ' + translitOfNum1(nums[1]);  
+        }
+    }
+    return result;
+}    
+ function translitOfNNN(num) {
+    let result = ''; 
+    if (num < 1000) {
+        if (num >= 100) {
+            let nums = String(num);
+            result = translitOfNum111(nums[0]);
+            if (nums[1] != '0' && nums[2] != '0') {
+            result += ' ' + translitOfNN(+(nums[1] + nums[2]));
+            } 
+            else if (nums[1] != '0' && nums[2] == '0') {
+            result += ' ' + translitOfNN(+(nums[1] + nums[2]));   
+            }
+        } 
+        else { 
+            result = translitOfNN(num);
+        }
+    } return result; 
+
+ }   
+
+console.log(translitOfNNN(855));
+</script>
+</head>
+<body>
